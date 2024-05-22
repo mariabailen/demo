@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.mariabailen.simfood.model;
 
 
 import jakarta.persistence.*;
