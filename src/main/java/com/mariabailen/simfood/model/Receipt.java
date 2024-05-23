@@ -8,6 +8,25 @@ import java.util.List;
 @Table(name = "receipt")
 public class Receipt {
 
+    
+
+    public Receipt() {
+    }
+
+    public Receipt(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Receipt( String name, String description, Chef chef, List<Ingredient> ingredients,
+            List<ReceiptImage> images) {
+        this.name = name;
+        this.description = description;
+        this.chef = chef;
+        this.ingredients = ingredients;
+        this.images = images;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

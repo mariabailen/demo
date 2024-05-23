@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.mariabailen.simfood.model.Receipt;
 
-public interface RecetaRepository extends CrudRepository<Receipt, Long> {
+public interface ReceiptRepository extends CrudRepository<Receipt, Long> {
     
 }

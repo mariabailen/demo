@@ -8,6 +8,18 @@ import java.util.List;
 @Table(name = "chef")
 public class Chef {
 
+    
+
+    public Chef() {
+    }
+
+    public Chef(String name, String lastName, LocalDate birthDate, String image) {
+        this.name = name;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.image = image;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

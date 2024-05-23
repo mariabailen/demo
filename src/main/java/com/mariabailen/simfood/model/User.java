@@ -3,8 +3,19 @@ package com.mariabailen.simfood.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "appUser")
 public class User {
+
+    
+
+    public User() {
+    }
+
+    public User(String username, String pass, String role) {
+        this.username = username;
+        this.pass = pass;
+        this.role = role;
+    }
 
     @Id
     @Column(name = "username", nullable = false)

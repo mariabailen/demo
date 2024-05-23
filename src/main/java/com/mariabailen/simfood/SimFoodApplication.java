@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @ServletComponentScan
 @SpringBootApplication
-@EnableJpaRepositories("com.maria.simfood.repository") 
-@EntityScan("com.example.simfood.model")
+@EnableJpaRepositories("com.mariabailen.simfood.repository") 
+@EntityScan("com.mariabailen.simfood.model")
 public class SimFoodApplication {
 
 	

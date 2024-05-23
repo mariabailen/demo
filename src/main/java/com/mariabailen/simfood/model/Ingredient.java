@@ -6,6 +6,16 @@ import jakarta.persistence.*;
 @Table(name = "ingredient")
 public class Ingredient {
 
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String name, String quantity, Receipt receipt) {
+        this.name = name;
+        this.quantity = quantity;
+        this.receipt = receipt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,7 +24,7 @@ public class Ingredient {
     private String name;
 
     @Column(name = "quantity", nullable = false)
-    private Double quantity;
+    private String quantity;
 
     @ManyToOne
     @JoinColumn(name = "receipt_id", nullable = false)
@@ -37,11 +47,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public Double getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

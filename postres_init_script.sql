@@ -1,5 +1,5 @@
 -- Crear tabla user
-CREATE TABLE "user" (
+CREATE TABLE appuser (
   "user" VARCHAR(255) UNIQUE NOT NULL,
   pass VARCHAR(255) NOT NULL,
   "role" VARCHAR(255) NOT NULL
@@ -41,7 +41,7 @@ CREATE TABLE receiptImage(
 );
 
 -- Insertar user
-INSERT INTO "user" ("user", pass, "role") VALUES
+INSERT INTO appuser ("user", pass, "role") VALUES
   ('admin', '123', 'admin'),
   ('cocinero', '123', 'cocinero');
 

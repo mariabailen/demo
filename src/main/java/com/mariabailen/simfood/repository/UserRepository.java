@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.mariabailen.simfood.model.User;
 
-public interface UsuarioRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, String> {
     
 }

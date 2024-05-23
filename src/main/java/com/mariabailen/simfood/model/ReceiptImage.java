@@ -6,6 +6,11 @@ import jakarta.persistence.*;
 @Table(name = "receiptImage")
 public class ReceiptImage {
 
+
+    
+    public ReceiptImage() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
