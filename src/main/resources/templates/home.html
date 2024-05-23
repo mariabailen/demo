@@ -1,9 +1,16 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
-<head><title>Home Page</title></head>
-<body>
-	<h1>Hello !</h1>
-	<p>Welcome to <span th:text="${appName}">Our App</span></p>
-    <br/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SimFood</title>
+	<link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <script th:src="@{/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
     
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola desde Spring Boot con Bootstrap!</h1>
+    </div>
 </body>
 </html>
