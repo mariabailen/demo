@@ -25,9 +25,9 @@
 		<tr th:if="${receipts.empty}">
 				<td colspan="2"> No Receipts Available </td>
 			</tr>
-			<tr th:each="Receipts : ${receipts}">
-				<td><span th:text="${receipts.name}"> Name </span></td>
-				<td><span th:text="${receipts.chef.name}"> Author </span></td>
+			<tr th:each="receipt : ${receipts}">
+				<td><span th:text="${receipt.name}"> Name </span></td>
+				<td><span th:text="${receipt.chef.name}"> Author </span></td>
 			</tr>
 		</tbody>
 	</table>
