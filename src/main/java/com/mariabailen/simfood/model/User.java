@@ -3,8 +3,8 @@ package com.mariabailen.simfood.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "user")
+public class User {
 
     @Id
     @Column(name = "username", nullable = false)

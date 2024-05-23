@@ -12,5 +12,24 @@
     <div class="container">
         <h1>¡Hola desde Spring Boot con Bootstrap!</h1>
     </div>
+
+
+	<table>
+		<thead>
+			<tr>
+				<th> Title </th>
+				<th> Author </th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr th:if="${books.empty}">
+				<td colspan="2"> No Receipts Available </td>
+			</tr>
+			<tr th:each="book : ${books}">
+				<td><span th:text="${book.title}"> Title </span></td>
+				<td><span th:text="${book.author}"> Author </span></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

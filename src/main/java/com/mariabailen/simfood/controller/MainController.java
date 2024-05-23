@@ -14,6 +14,7 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
+        //model.addAttribute("receipts", )
         model.addAttribute("appName", appName);
         return "home";
     }

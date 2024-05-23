@@ -3,8 +3,8 @@ package com.mariabailen.simfood.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "imagenReceta")
-public class ImagenReceta {
+@Table(name = "receiptImage")
+public class ReceiptImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +14,8 @@ public class ImagenReceta {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "receta_id", nullable = false)
-    private Receta receta;
+    @JoinColumn(name = "receipt_id", nullable = false)
+    private Receipt receipt;
 
     // Getters y Setters
     public Long getId() {
@@ -34,11 +34,11 @@ public class ImagenReceta {
         this.url = url;
     }
 
-    public Receta getReceta() {
-        return receta;
+    public Receipt getReceipt() {
+        return receipt;
     }
 
-    public void setReceta(Receta receta) {
-        this.receta = receta;
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 }
