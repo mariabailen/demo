@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SimFood</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <script th:src="@{/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+    <div th:insert="/header"> </div>
+    <div th:text="${receipt.name}"></div>
+</body>

@@ -11,6 +11,13 @@ public class ReceiptImage {
     public ReceiptImage() {
     }
 
+    
+
+    public ReceiptImage(String url, Receipt receipt) {
+        this.url = url;
+        this.receipt = receipt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

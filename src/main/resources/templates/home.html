@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>SimFood</title>
+	<meta charset="UTF-8">
+	<title>SimFood</title>
 	<link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-    <script th:src="@{/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/bootstrap.min.js}"></script>
-    
+	<script th:src="@{/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/bootstrap.min.js}"></script>
+
 </head>
+
 <body>
-    <div class="container">
-        <h1>¡Hola desde Spring Boot con Bootstrap!</h1>
-    </div>
+	<div th:insert="/header"> </div>
+	<div class="row">
+		<div class="col-6 mx-auto">
+			<h1>Listado de recetas</h1>
 
+			<div class="list-group">
 
-	<table>
-		<thead>
-			<tr>
-				<th> Title </th>
-				<th> Author </th>
-			</tr>
-		</thead>
-		<tbody>
-		<tr th:if="${receipts.empty}">
-				<td colspan="2"> No Receipts Available </td>
-			</tr>
-			<tr th:each="receipt : ${receipts}">
-				<td><span th:text="${receipt.name}"> Name </span></td>
-				<td><span th:text="${receipt.chef.name}"> Author </span></td>
-			</tr>
-		</tbody>
-	</table>
+				<div th:if="${receipts.empty}">
+					<p colspan="2"> No Receipts Available </p>
+				</div>
+				<div th:each="receipt: ${receipts}">
+
+					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+						<div class="col mb-3">
+							<div class="card">
+								<img th:src="${receipt.images[0].url}" class="card-img-top img-fluid"
+									alt="Imagen de la receta">
+								<div class="card-body">
+									<h5 class="card-title" th:text="${receipt.name}">Nombre de la receta</h5>
+									<p class="card-text" th:text="${receipt.chef.name}"></p>
+									<a class="btn btn-primary" th:href="@{/receipt(id=${receipt.id})}">Ver receta</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

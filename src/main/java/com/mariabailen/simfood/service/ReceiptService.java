@@ -2,6 +2,7 @@ package com.mariabailen.simfood.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class ReceiptService {
 
         return receipts;
     }
+
+    public Optional<Receipt> getReceipt(Long id) {
+        return receiptRepository.findById(id);
+    } 
 
 }

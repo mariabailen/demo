@@ -80,19 +80,19 @@ public class Receipt {
         this.chef = chef;
     }
 
-    public List<Ingredient> getIngredientes() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredientes(List<Ingredient> ingredientes) {
-        this.ingredients = ingredientes;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public List<ReceiptImage> getImagenes() {
+    public List<ReceiptImage> getImages() {
         return images;
     }
 
-    public void setImagenes(List<ReceiptImage> imagenes) {
+    public void setImages(List<ReceiptImage> imagenes) {
         this.images = imagenes;
     }
 }
