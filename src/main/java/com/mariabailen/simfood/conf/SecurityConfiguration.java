@@ -27,7 +27,7 @@ public class SecurityConfiguration {
         .formLogin((form) -> form
             .loginPage("/login")
             .permitAll())
-        .logout((logout) -> logout.permitAll());
+        .logout((logout) -> logout.permitAll().logoutSuccessUrl("/home"));
 
     return http.build();
   }
