@@ -18,16 +18,26 @@ public class ReceiptService {
 
     public List<Receipt> getReceipts() {
         List<Receipt> receipts = new ArrayList<Receipt>();
-    
+
         for (Receipt receipt : receiptRepository.findAll()) {
-            receipts.add(receipt);        
+            receipts.add(receipt);
         }
 
         return receipts;
     }
 
+    public List<Receipt> getReceiptsByNameOrDesc(String input) {
+        List<Receipt> receipts = new ArrayList<Receipt>();
+        for (Receipt receipt : receiptRepository.findAll()) {
+            if (receipt.getName().toLowerCase().contains(input.toLowerCase()) || receipt.getDescription().toLowerCase().contains(input.toLowerCase())) {
+                receipts.add(receipt);
+            }
+        }
+        return receipts;
+    }
+
     public Optional<Receipt> getReceipt(Long id) {
         return receiptRepository.findById(id);
-    } 
+    }
 
 }

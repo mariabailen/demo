@@ -21,13 +21,13 @@ import com.mariabailen.simfood.repository.UserRepository;
 
 @Configuration
 public class LoadDatabase {
-        
+
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository, ChefRepository chefRepository,
             ReceiptRepository receiptRepository, IngredientRepository ingredientRepository,
             ReceiptImageRepository receiptImageRepository) {
         return args -> {
-            User  user = userRepository.save(new User("admin", "123", "admin"));
+            User user = userRepository.save(new User("admin", "123", "admin"));
             User user2 = userRepository.save(new User("cocinero", "123", "cocinero"));
 
             Chef juan = chefRepository

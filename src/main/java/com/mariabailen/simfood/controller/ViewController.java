@@ -46,7 +46,7 @@ public class ViewController {
     }
 
     @GetMapping("/receipt")
-    public String getMethodName(@RequestParam(value = "id", required = true) Long id, Model model) {
+    public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
         model.addAttribute("appName", appName);
         Optional<Receipt> receipt = receiptService.getReceipt(id);
         if (receipt.isPresent()) {
@@ -54,6 +54,20 @@ public class ViewController {
         }
         return "receipt";
     }
+
+    @RequestMapping("/search")
+    public String searchList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
+        model.addAttribute("appName", appName);
+        model.addAttribute("searchInput", searchInput);
+        if (searchInput == null || searchInput.isEmpty()) {
+            model.addAttribute("receipts", receiptService.getReceipts());
+        } else {
+            model.addAttribute("receipts", receiptService.getReceiptsByNameOrDesc(searchInput));
+        }
+
+        return "search";
+    }
+    
 
 
 }
