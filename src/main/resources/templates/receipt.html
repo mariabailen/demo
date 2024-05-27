@@ -3,14 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SimFood</title>
+    <title th:text="${appName}"></title>
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <script th:src="@{/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/bootstrap.min.js}"></script>
+
+    <style>
+        .recipe-name {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            border: 1px solid;
+            border-radius: 5px;
+            background-color: #cccccc;
+            color: #ffffff;
+        }
+
+        .recipe-description {
+            margin: 20px auto;
+            padding: 15px;
+            max-width: 800px;
+        }
+    </style>
 
 </head>
 
 <body>
     <div th:insert="/header"> </div>
-    <div th:text="${receipt.name}"></div>
+    <h1 class="recipe-name" th:text="${receipt.name}"></h1>
+    <h6 class="recipe-description" th:text="${receipt.description}"></h6>
+    <div th:each="image: ${receipt.images}">
+        <img th:src="${image.url}" />
+    </div>
+
+
 </body>
