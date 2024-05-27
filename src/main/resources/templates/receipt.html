@@ -62,33 +62,59 @@
 
 <body>
     <div th:insert="/header"> </div>
-    <div class="row">
-        <div class="col-6 mx-auto">
-            <h1 class="recipe-name" th:text="${receipt.name}"></h1>
 
-            <h3 class="'recipe-description-label">Descripción:</h3>
-            <h6 class="recipe-description" th:text="${receipt.description}"></h6>
-
-            <div th:each="image: ${receipt.images}">
-                <div style="margin: 10px 80px; display: inline-block;">
-                    <img th:src="${image.url}" />
-                </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 th:text="${receipt.name}"></h1>
+                <p class="lead" th:text="${receipt.description}"></p>
             </div>
+        </div>
 
-            <h3 class="'ingredients-label">Ingredientes:</h3>
-            <ul th:each="ingredient: ${receipt.ingredients}">
-                <li th:text="${ingredient.name}"></li>
-                <li th:text="${ingredient.quantity}"></li>
-            </ul>
+        <div class="row mt-4">
+            <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
 
-            <h3 class="'ingredients-label">Chef:</h3>
-            <div class="col-9 mx-auto">
-                <img th:src="${receipt.chef.image}" alt="Imagen del Chef">
-                <h4 th:text="${receipt.chef.name}"></h4>
-                <p th:text="'Fecha de nacimiento: ' + ${receipt.chef.birthDate}"></p>
+                <div class="carousel-inner" th:each="image: ${receipt.images}">
+                    <div class="carousel-item"
+                        th:classappend="${receipt.images[0].url==image.url} ? 'carousel-item active': ''">
+                        <img th:src=" ${image.url}" class="d-block w-100" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#recipeCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#recipeCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <h2>Ingredientes</h2>
+                <ul class="list-group" th:each="ingredient: ${receipt.ingredients}">
+                    <li class="list-group-item" th:text="|${ingredient.name} ${ingredient.quantity}|"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <img th:src="${receipt.chef.image}" class="img-fluid rounded-circle" alt="Imagen del Cocinero">
+            </div>
+            <div class="col-md-8 d-flex align-items-center">
+                <div>
+                    <h3>Cocinero</h3>
+                    <p th:text="'Nombre: ' + ${receipt.chef.name}"></p>
+                    <p th:text="'Nombre: ' + ${receipt.chef.lastName}"></p>
+                    <p th:text="'Fecha de nacimiento: ' + ${receipt.chef.birthDate}"></p>
+                </div>
             </div>
         </div>
     </div>
-
 
 </body>
