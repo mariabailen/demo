@@ -19,6 +19,7 @@
 
 
         }
+
         .ingredients-name {
             margin: 20px auto;
             padding: 15px;
@@ -26,8 +27,9 @@
             float: right;
             width: 40%;
             margin: 0 400px 400px 0;
-        
+
         }
+
         .recipe-description {
             margin: 20px auto;
             padding: 15px;
@@ -43,13 +45,15 @@
             vertical-align: top;
             margin-right: 200px;
         }
+
         .ingredients-label {
             display: inline-block;
             width: 40%;
             vertical-align: top;
             margin-right: 200px;
         }
-        img{
+
+        img {
             border-radius: 10px;
         }
     </style>
@@ -58,22 +62,32 @@
 
 <body>
     <div th:insert="/header"> </div>
-    <h1 class="recipe-name" th:text="${receipt.name}"></h1>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1 class="recipe-name" th:text="${receipt.name}"></h1>
 
-    <h3 class="'ingredients-label">Ingredientes:</h3>
-    <ul th:each="ingredient: ${receipt.ingredients}">
-        <li th:text="${ingredient.name}"></li>
-        <li th:text="${ingredient.quantity}"></li>
-    </ul>
+            <h3 class="'recipe-description-label">Descripción:</h3>
+            <h6 class="recipe-description" th:text="${receipt.description}"></h6>
 
-    <h3 class="'recipe-description-label">Descripción:</h3>
-    <h6 class="recipe-description" th:text="${receipt.description}"></h6>
+            <div th:each="image: ${receipt.images}">
+                <div style="margin: 10px 80px; display: inline-block;">
+                    <img th:src="${image.url}" />
+                </div>
+            </div>
 
-    <div th:each="image: ${receipt.images}">
-        <div style="margin: 10px 80px; display: inline-block;">
-            <img th:src="${image.url}" />
+            <h3 class="'ingredients-label">Ingredientes:</h3>
+            <ul th:each="ingredient: ${receipt.ingredients}">
+                <li th:text="${ingredient.name}"></li>
+                <li th:text="${ingredient.quantity}"></li>
+            </ul>
+
+            <h3 class="'ingredients-label">Chef:</h3>
+            <div class="col-9 mx-auto">
+                <img th:src="${receipt.chef.image}" alt="Imagen del Chef">
+                <h4 th:text="${receipt.chef.name}"></h4>
+                <p th:text="'Fecha de nacimiento: ' + ${receipt.chef.birthDate}"></p>
+            </div>
         </div>
-
     </div>
 
 
