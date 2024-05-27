@@ -19,6 +19,8 @@
             <p colspan="2"> No Receipts Available </p>
         </div>
 
+        <a href="" class="btn btn-outline-success" type="submit" sec:authorize="hasRole('ADMIN')">Add chef</a>
+
         <ul class="list-group">
             <li class="list-group-item" th:each="chef: ${chefs}">
                 <div class="row mt-4">
