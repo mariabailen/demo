@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import com.mariabailen.simfood.model.Chef;
 import com.mariabailen.simfood.model.Ingredient;
@@ -20,13 +21,14 @@ import com.mariabailen.simfood.repository.UserRepository;
 
 @Configuration
 public class LoadDatabase {
+        
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository, ChefRepository chefRepository,
             ReceiptRepository receiptRepository, IngredientRepository ingredientRepository,
             ReceiptImageRepository receiptImageRepository) {
         return args -> {
-            userRepository.save(new User("admin", "123", "admin"));
-            userRepository.save(new User("cocinero", "123", "cocinero"));
+            User  user = userRepository.save(new User("admin", "123", "admin"));
+            User user2 = userRepository.save(new User("cocinero", "123", "cocinero"));
 
             Chef juan = chefRepository
                     .save(new Chef("Juan", "Perez", LocalDate.parse("1980-01-01"), "/images/juan.png"));
