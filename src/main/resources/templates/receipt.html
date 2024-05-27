@@ -112,6 +112,7 @@
                     <p th:text="'Nombre: ' + ${receipt.chef.name}"></p>
                     <p th:text="'Nombre: ' + ${receipt.chef.lastName}"></p>
                     <p th:text="'Fecha de nacimiento: ' + ${receipt.chef.birthDate}"></p>
+                    <a class="btn btn-primary" th:href="@{/chef(id=${receipt.chef.id})}">Ver Chef</a>
                 </div>
             </div>
         </div>

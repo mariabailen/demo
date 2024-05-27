@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.mariabailen.simfood.model.User;
 import com.mariabailen.simfood.repository.UserRepository;
 
 @Configuration

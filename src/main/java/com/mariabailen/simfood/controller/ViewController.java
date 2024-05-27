@@ -9,19 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mariabailen.simfood.model.Chef;
 import com.mariabailen.simfood.model.Receipt;
+import com.mariabailen.simfood.service.ChefService;
 import com.mariabailen.simfood.service.ReceiptService;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.web.bind.annotation.RequestParam;
-import org.unbescape.html.HtmlEscape;
 
 @Controller
 public class ViewController {
 
     @Autowired
     ReceiptService receiptService;
+
+    @Autowired
+    ChefService chefService;
 
     @Value("${spring.application.name}")
     String appName;
@@ -45,6 +47,17 @@ public class ViewController {
         return "login";
     }
 
+    @GetMapping("/chef")
+    public String chefDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
+        model.addAttribute("appName", appName);
+        Optional<Chef> chef = chefService.getChef(id);
+        if (chef.isPresent()) {
+            model.addAttribute("chef", chef.get());
+        }
+        return "chef";
+    }
+
+
     @GetMapping("/receipt")
     public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
         model.addAttribute("appName", appName);
@@ -54,6 +67,7 @@ public class ViewController {
         }
         return "receipt";
     }
+
 
     @RequestMapping("/search")
     public String searchList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {

@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${appName}"></title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <script th:src="@{/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
+</head>
+
+
+<body>
+    <div th:insert="/header"> </div>
+
+    <div class="container mt-5">
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <img th:src="${chef.image}" class="img-fluid rounded-circle" alt="Imagen del Cocinero">
+            </div>
+            <div class="col-md-8 d-flex align-items-center">
+                <div>
+                    <h3>Cocinero</h3>
+                    <p th:text="'Nombre: ' + ${chef.name}"></p>
+                    <p th:text="'Nombre: ' + ${chef.lastName}"></p>
+                    <p th:text="'Fecha de nacimiento: ' + ${chef.birthDate}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-
 import com.mariabailen.simfood.model.Chef;
 import com.mariabailen.simfood.model.Ingredient;
 import com.mariabailen.simfood.model.Receipt;
