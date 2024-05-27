@@ -1,5 +1,7 @@
 package com.mariabailen.simfood.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,13 @@ public class ChefService {
 
     public Optional<Chef> getChef(Long id) {
         return chefRepository.findById(id);
+    }
+
+    public List<Chef> getAllChefs() {
+        ArrayList<Chef> chefs = new ArrayList<Chef>();
+        for (Chef chef : chefRepository.findAll()) {
+            chefs.add(chef);
+        }
+        return chefs;
     }
 }

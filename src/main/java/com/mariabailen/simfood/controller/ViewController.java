@@ -29,8 +29,13 @@ public class ViewController {
     String appName;
 
     @GetMapping(path = {"/", "/home"})
-    public String home(Model model) {
-        model.addAttribute("receipts", receiptService.getReceipts());
+    public String home(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
+        model.addAttribute("searchInput", searchInput);
+        if (searchInput == null || searchInput.isEmpty()) {
+            model.addAttribute("receipts", receiptService.getReceipts());
+        } else {
+            model.addAttribute("receipts", receiptService.getReceiptsByNameOrDesc(searchInput));
+        }
         model.addAttribute("appName", appName);
         return "home";
     }
@@ -57,6 +62,14 @@ public class ViewController {
         return "chef";
     }
 
+    @GetMapping("/chefs")
+    public String chefList(Model model) {
+        model.addAttribute("appName", appName);
+        java.util.List<Chef> chefs = chefService.getAllChefs();
+        model.addAttribute("chefs", chefs);
+        return "chefs";
+    }
+
 
     @GetMapping("/receipt")
     public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
@@ -67,21 +80,7 @@ public class ViewController {
         }
         return "receipt";
     }
-
-
-    @RequestMapping("/search")
-    public String searchList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
-        model.addAttribute("appName", appName);
-        model.addAttribute("searchInput", searchInput);
-        if (searchInput == null || searchInput.isEmpty()) {
-            model.addAttribute("receipts", receiptService.getReceipts());
-        } else {
-            model.addAttribute("receipts", receiptService.getReceiptsByNameOrDesc(searchInput));
-        }
-
-        return "search";
-    }
-    
+  
 
 
 }

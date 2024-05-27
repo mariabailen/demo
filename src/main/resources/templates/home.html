@@ -12,44 +12,46 @@
 
 <body>
 	<div th:insert="/header"> </div>
-	<div class="row">
-		<div class="col-6 mx-auto">
+	<div class="container mt-5">
 
-			<div sec:authorize="isAuthenticated()">
-				This content is only shown to authenticated users.
-			  </div>
-			  <div sec:authorize="hasRole('ADMIN')">
-				This content is only shown to administrators.
-			  </div>
-			  <div sec:authorize="hasRole('CHEF')">
-				This content is only shown to CHEF.
-			  </div>
+		<div sec:authorize="isAuthenticated()">
+			This content is only shown to authenticated users.
+		</div>
+		<div sec:authorize="hasRole('ADMIN')">
+			This content is only shown to administrators.
+		</div>
+		<div sec:authorize="hasRole('CHEF')">
+			This content is only shown to CHEF.
+		</div>
 
-			<h1>Listado de recetas</h1>
+		<h1>Listado de recetas</h1>
 
-			<div class="list-group">
+		<div class="container-fluid">
+			<form class="d-flex" method="get" th:action="@{/home}">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput" th:value="${searchInput}">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
 
-				<div th:if="${receipts.empty}">
-					<p colspan="2"> No Receipts Available </p>
-				</div>
-				<div th:each="receipt: ${receipts}">
-
-					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-						<div class="col mb-3">
-							<div class="card">
-								<img th:src="${receipt.images[0].url}" class="card-img-top img-fluid"
-									alt="Imagen de la receta">
-								<div class="card-body">
-									<h5 class="card-title" th:text="${receipt.name}">Nombre de la receta</h5>
-									<p class="card-text" th:text="${receipt.chef.name}"></p>
-									<a class="btn btn-primary" th:href="@{/receipt(id=${receipt.id})}">Ver receta</a>
-								</div>
-							</div>
+		<div th:if="${receipts.empty}">
+			<p colspan="2"> No Receipts Available </p>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="receipt: ${receipts}">
+				<div class="row mt-4">
+					<div class="col-md-4">
+						<img th:src="${receipt.images[0].url}" class="card-img-top img-fluid" alt="Imagen de la receta">
+					</div>
+					<div class="col-md-8 d-flex align-items-center">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${receipt.name}"></h5>
+							<p><a th:href="@{/chef(id=${receipt.chef.id})}" class="card-text" th:text="| ${receipt.chef.name} ${receipt.chef.lastName} |"></a></p>
+							<a class="btn btn-primary" th:href="@{/receipt(id=${receipt.id})}">Ver receta</a>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</li>
+	</div>
 	</div>
 </body>
 
