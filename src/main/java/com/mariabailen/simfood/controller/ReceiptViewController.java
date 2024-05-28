@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mariabailen.simfood.model.Ingredient;
 import com.mariabailen.simfood.model.Receipt;
 import com.mariabailen.simfood.service.ReceiptService;
 
@@ -21,7 +24,7 @@ public class ReceiptViewController {
     @Autowired
     ReceiptService receiptService;
 
-    @GetMapping(path = {"/", "/home"})
+    @GetMapping(path = { "/", "/home" })
     public String home(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
         model.addAttribute("tab", "home");
         model.addAttribute("searchInput", searchInput);
@@ -34,7 +37,6 @@ public class ReceiptViewController {
         return "home";
     }
 
-
     @GetMapping("/receipt")
     public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
         model.addAttribute("tab", "home");
@@ -44,6 +46,20 @@ public class ReceiptViewController {
             model.addAttribute("receipt", receipt.get());
         }
         return "receipt";
+    }
+
+    @PostMapping("/add-ingredient")
+    public String addIngredient(@RequestParam Long receiptId, @RequestParam String name, @RequestParam String quantity,
+            Model model, RedirectAttributes redirectAttributes) {
+        model.addAttribute("tab", "home");
+        model.addAttribute("appName", appName);
+        Optional<Receipt> receipt = receiptService.addIngredient(receiptId, name, quantity);
+
+        if (receipt.isPresent()) {
+            model.addAttribute("receipt", receipt.get());
+        }
+        redirectAttributes.addAttribute("id", receiptId);
+        return "redirect:receipt";
     }
 
 }
