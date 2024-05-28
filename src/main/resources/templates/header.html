@@ -7,12 +7,12 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" th:classappend="${tab}=='home' ? 'active': ''" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/chefs">Chefs</a>
+                    <a class="nav-link" th:classappend="${tab}=='chef' ? 'active': ''" href="/chefs">Chefs</a>
                 </li>
-                <li class="nav-item"  sec:authorize="!isAuthenticated()">
+                <li class="nav-item"  sec:authorize="!isAuthenticated()" th:classappend="${tab}=='login' ? 'active': ''">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">

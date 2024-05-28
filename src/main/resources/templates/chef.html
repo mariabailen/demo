@@ -20,12 +20,25 @@
             </div>
             <div class="col-md-8 d-flex align-items-center">
                 <div>
-                    <h3>Cocinero</h3>
+                    <h3>Chef</h3>
                     <p th:text="'Name: ' + ${chef.name}"></p>
                     <p th:text="'LastName: ' + ${chef.lastName}"></p>
                     <p th:text="'BirthDate: ' + ${chef.birthDate}"></p>
                     <p><a href="" sec:authorize="hasRole('ADMIN')" >Edit Chef</a></p>
                 </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>Receipt List</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="recipe : ${chef.receipts}">
+                        <h5 th:text="${recipe.name}"></h5>
+                        <p th:text="${recipe.description}"></p>
+                        <a th:href="@{/receipt(id=${recipe.id})}" class="btn btn-primary">Ver receta</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

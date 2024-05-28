@@ -30,6 +30,7 @@ public class ViewController {
 
     @GetMapping(path = {"/", "/home"})
     public String home(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
+        model.addAttribute("tab", "home");
         model.addAttribute("searchInput", searchInput);
         if (searchInput == null || searchInput.isEmpty()) {
             model.addAttribute("receipts", receiptService.getReceipts());
@@ -42,6 +43,7 @@ public class ViewController {
 
     @RequestMapping("/login")
     public String login(Model model) {
+        model.addAttribute("tab", "login");
         model.addAttribute("appName", appName);
         return "login";
     }
@@ -51,36 +53,6 @@ public class ViewController {
         model.addAttribute("loginError", true);
         return "login";
     }
-
-    @GetMapping("/chef")
-    public String chefDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
-        model.addAttribute("appName", appName);
-        Optional<Chef> chef = chefService.getChef(id);
-        if (chef.isPresent()) {
-            model.addAttribute("chef", chef.get());
-        }
-        return "chef";
-    }
-
-    @GetMapping("/chefs")
-    public String chefList(Model model) {
-        model.addAttribute("appName", appName);
-        java.util.List<Chef> chefs = chefService.getAllChefs();
-        model.addAttribute("chefs", chefs);
-        return "chefs";
-    }
-
-
-    @GetMapping("/receipt")
-    public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
-        model.addAttribute("appName", appName);
-        Optional<Receipt> receipt = receiptService.getReceipt(id);
-        if (receipt.isPresent()) {
-            model.addAttribute("receipt", receipt.get());
-        }
-        return "receipt";
-    }
-  
 
 
 }
