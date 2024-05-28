@@ -33,11 +33,16 @@ public class ChefViewController {
     }
 
     @GetMapping("/chefs")
-    public String chefList(Model model) {
+    public String chefList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
         model.addAttribute("tab", "chef");
         model.addAttribute("appName", appName);
-        java.util.List<Chef> chefs = chefService.getAllChefs();
-        model.addAttribute("chefs", chefs);
+
+        model.addAttribute("searchInput", searchInput);
+        if (searchInput == null || searchInput.isEmpty()) {
+            model.addAttribute("chefs", chefService.getAllChefs());
+        } else {
+            model.addAttribute("chefs", chefService.getChefFilteredByNameAndLastName(searchInput));
+        }
         return "chefs";
     }
 

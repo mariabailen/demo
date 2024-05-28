@@ -12,7 +12,7 @@ import com.mariabailen.simfood.repository.ChefRepository;
 
 @Service
 public class ChefService {
-    
+
     @Autowired
     ChefRepository chefRepository;
 
@@ -24,6 +24,17 @@ public class ChefService {
         ArrayList<Chef> chefs = new ArrayList<Chef>();
         for (Chef chef : chefRepository.findAll()) {
             chefs.add(chef);
+        }
+        return chefs;
+    }
+
+    public List<Chef> getChefFilteredByNameAndLastName(String input) {
+        ArrayList<Chef> chefs = new ArrayList<Chef>();
+        for (Chef chef : chefRepository.findAll()) {
+            if (chef.getName().toLowerCase().contains(input.toLowerCase())
+                    || chef.getLastName().toLowerCase().contains(input.toLowerCase())) {
+                chefs.add(chef);
+            }
         }
         return chefs;
     }

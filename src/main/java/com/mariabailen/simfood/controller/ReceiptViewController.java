@@ -21,6 +21,20 @@ public class ReceiptViewController {
     @Autowired
     ReceiptService receiptService;
 
+    @GetMapping(path = {"/", "/home"})
+    public String home(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
+        model.addAttribute("tab", "home");
+        model.addAttribute("searchInput", searchInput);
+        if (searchInput == null || searchInput.isEmpty()) {
+            model.addAttribute("receipts", receiptService.getReceipts());
+        } else {
+            model.addAttribute("receipts", receiptService.getReceiptsByNameOrDesc(searchInput));
+        }
+        model.addAttribute("appName", appName);
+        return "home";
+    }
+
+
     @GetMapping("/receipt")
     public String receiptDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
         model.addAttribute("tab", "home");

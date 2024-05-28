@@ -21,6 +21,13 @@
 
         <a href="" class="btn btn-outline-success" type="submit" sec:authorize="hasRole('ADMIN')">Add chef</a>
 
+        <div class="container-fluid">
+			<form class="d-flex" method="get" th:action="@{/chefs}">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput" th:value="${searchInput}">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
+
         <ul class="list-group">
             <li class="list-group-item" th:each="chef: ${chefs}">
                 <div class="row mt-4">
@@ -30,7 +37,7 @@
                     </div>
                     <div class="col-md-8 d-flex align-items-center">
                         <div>
-                            <h3>Cocinero</h3>
+                            <h3>Chef</h3>
                             <p th:text="'Name: ' + ${chef.name}"></p>
                             <p th:text="'Last name: ' + ${chef.lastName}"></p>
                             <p th:text="'Birthdate: ' + ${chef.birthDate}"></p>
