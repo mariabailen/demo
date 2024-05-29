@@ -1,11 +1,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${appName}"></title>
-    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-    <script th:src="@{/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/bootstrap.min.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <style>
         .recipe-name {
@@ -98,11 +98,50 @@
                 <h2>Ingredientes</h2>
                 <ul class="list-group" th:each="ingredient: ${receipt.ingredients}">
                     <li class="list-group-item" th:text="|${ingredient.name} ${ingredient.quantity}|"></li>
+                    <button sec:authorize="hasAnyRole('ADMIN','CHEF')" type="button" class="btn btn-secondary btn-sm"
+                        data-bs-toggle="modal"
+                        th:data-bs-target="'#editIngredientModal' + ${ingredient.id}">Editar</button>
                 </ul>
 
+                <!-- Modal para editar ingredientes -->
+                <div th:each="ingredient: ${receipt.ingredients}" th:id="'editIngredientModal' + ${ingredient.id}"
+                    class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form th:action="@{/edit-ingredient}" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Editar Ingrediente</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="id" th:value="${ingredient.id}">
+                                    <div class="mb-3">
+                                        <label for="ingredientName" class="form-label">Nombre del Ingrediente</label>
+                                        <input type="text" class="form-control" id="ingredientName"
+                                            name="ingredientName" th:value="${ingredient.name}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ingredientQuantity" class="form-label">Cantidad</label>
+                                        <input type="text" class="form-control" id="ingredientQuantity"
+                                            name="ingredientQuantity" th:value="${ingredient.quantity}" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Formulario para añadir un nuevo ingrediente -->
-                <form th:action="@{/add-ingredient}" method="post" class="mt-3" sec:authorize="hasAnyRole('ADMIN','CHEF')">
-                    <input type="text" class="form-control" id="receiptId" name="receiptId" th:value="${receipt.id}" style="
+                <form th:action="@{/add-ingredient}" method="post" class="mt-3"
+                    sec:authorize="hasAnyRole('ADMIN','CHEF')">
+                    <input type="text" class="form-control" id="receiptId" name="receiptId" th:value="${receipt.id}"
+                        style="
                     visibility: hidden;" required>
 
                     <div class="mb-3">
@@ -111,8 +150,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="ingredientQuantity" class="form-label">Cantidad</label>
-                        <input type="text" class="form-control" id="quantity" name="quantity"
-                            required>
+                        <input type="text" class="form-control" id="quantity" name="quantity" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Añadir Ingrediente</button>
                 </form>
@@ -127,9 +165,9 @@
             <div class="col-md-8 d-flex align-items-center">
                 <div>
                     <h3>Cocinero</h3>
-                    <p th:text="'Nombre: ' + ${receipt.chef.name}"></p>
-                    <p th:text="'Nombre: ' + ${receipt.chef.lastName}"></p>
-                    <p th:text="'Fecha de nacimiento: ' + ${receipt.chef.birthDate}"></p>
+                    <p th:text="'Name: ' + ${receipt.chef.name}"></p>
+                    <p th:text="'Lastname: ' + ${receipt.chef.lastName}"></p>
+                    <p th:text="'Birhtdate: ' + ${receipt.chef.birthDate}"></p>
                     <a class="btn btn-primary" th:href="@{/chef(id=${receipt.chef.id})}">Ver Chef</a>
                 </div>
             </div>
