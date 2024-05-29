@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mariabailen.simfood.model.Ingredient;
 import com.mariabailen.simfood.model.Receipt;
 import com.mariabailen.simfood.service.ReceiptService;
 

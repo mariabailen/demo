@@ -20,51 +20,93 @@ import com.mariabailen.simfood.repository.UserRepository;
 @Configuration
 public class LoadDatabase {
 
-    @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, ChefRepository chefRepository,
-            ReceiptRepository receiptRepository, IngredientRepository ingredientRepository,
-            ReceiptImageRepository receiptImageRepository) {
-        return args -> {
-            User user = userRepository.save(new User("admin", "123", "admin"));
-            User user2 = userRepository.save(new User("cocinero", "123", "cocinero"));
+        @Bean
+        CommandLineRunner initDatabase(UserRepository userRepository, ChefRepository chefRepository,
+                        ReceiptRepository receiptRepository, IngredientRepository ingredientRepository,
+                        ReceiptImageRepository receiptImageRepository) {
+                return args -> {
+                        User user = userRepository.save(new User("admin", "123", "admin"));
+                        User user2 = userRepository.save(new User("cocinero", "123", "cocinero"));
 
-            Chef juan = chefRepository
-                    .save(new Chef("Juan", "Perez", LocalDate.parse("1980-01-01"), "/images/juan.png"));
-            Chef maria = chefRepository
-                    .save(new Chef("María", "Gomez", LocalDate.parse("1990-07-15"), "/images/maria.png"));
-            Chef pedro = chefRepository
-                    .save(new Chef("Pedro", "López", LocalDate.parse("1980-08-02"), "/images/pedro.png"));
+                        Chef juan = chefRepository
+                                        .save(new Chef("Juan", "Perez", LocalDate.parse("1980-01-01"),
+                                                        "/images/juan.png"));
+                        Chef maria = chefRepository
+                                        .save(new Chef("María", "Gomez", LocalDate.parse("1990-07-15"),
+                                                        "/images/maria.png"));
+                        Chef pedro = chefRepository
+                                        .save(new Chef("Pedro", "López", LocalDate.parse("1980-08-02"),
+                                                        "/images/pedro.png"));
+                        Chef ana = chefRepository.save(
+                                        new Chef("Ana", "Martinez", LocalDate.parse("1985-05-20"), "/images/ana.png"));
+                        Chef luis = chefRepository.save(
+                                        new Chef("Luis", "Ramirez", LocalDate.parse("1975-03-10"), "/images/luis.png"));
 
-            ArrayList<Ingredient> ingredientsTortilla = new ArrayList<>();
-            Receipt tortilla = receiptRepository.save(new Receipt("Tortilla de patatas",
-                    "Receta tradicional española de patatas, huevos y cebolla.", juan, ingredientsTortilla, null));
-            ingredientsTortilla.add(new Ingredient("Patatas", "500 g", tortilla));
-            ingredientsTortilla.add(new Ingredient("Huevos", "4 u", tortilla));
-            ingredientsTortilla.add(new Ingredient("Cebolla", "1 u", tortilla));
-            ingredientRepository.saveAll(ingredientsTortilla);
-            receiptImageRepository.save(new ReceiptImage("images/tortilla1.jpeg", tortilla));
-            receiptImageRepository.save(new ReceiptImage("images/tortilla2.jpeg", tortilla));
+                        ArrayList<Ingredient> ingredientsTortilla = new ArrayList<>();
+                        Receipt tortilla = receiptRepository.save(new Receipt("Tortilla de patatas",
+                                        "Receta tradicional española de patatas, huevos y cebolla.", juan,
+                                        ingredientsTortilla, null));
+                        ingredientsTortilla.add(new Ingredient("Patatas", "500 g", tortilla));
+                        ingredientsTortilla.add(new Ingredient("Huevos", "4 u", tortilla));
+                        ingredientsTortilla.add(new Ingredient("Cebolla", "1 u", tortilla));
+                        ingredientRepository.saveAll(ingredientsTortilla);
+                        receiptImageRepository.save(new ReceiptImage("images/tortilla1.jpeg", tortilla));
+                        receiptImageRepository.save(new ReceiptImage("images/tortilla2.jpeg", tortilla));
 
-            ArrayList<Ingredient> ingredientsPaella = new ArrayList<>();
-            Receipt paella = receiptRepository.save(new Receipt("Paella valenciana",
-                    "Arroz con azafrán, verduras, carne y marisco.", maria, ingredientsPaella, null));
-            ingredientsPaella.add(new Ingredient("Arroz", "250 g", paella));
-            ingredientsPaella.add(new Ingredient("Azafrán", "0.05 g", paella));
-            ingredientRepository.saveAll(ingredientsPaella);
-            receiptImageRepository.save(new ReceiptImage("images/paella1.jpeg", paella));
-            receiptImageRepository.save(new ReceiptImage("images/paella2.jpeg", paella));
+                        ArrayList<Ingredient> ingredientsPaella = new ArrayList<>();
+                        Receipt paella = receiptRepository.save(new Receipt("Paella valenciana",
+                                        "Arroz con azafrán, verduras, carne y marisco.", maria, ingredientsPaella,
+                                        null));
+                        ingredientsPaella.add(new Ingredient("Arroz", "250 g", paella));
+                        ingredientsPaella.add(new Ingredient("Azafrán", "0.05 g", paella));
+                        ingredientsPaella.add(new Ingredient("Pollo", "200 g", paella));
+                        ingredientsPaella.add(new Ingredient("Conejo", "200 g", paella));
+                        ingredientRepository.saveAll(ingredientsPaella);
+                        receiptImageRepository.save(new ReceiptImage("images/paella1.jpeg", paella));
+                        receiptImageRepository.save(new ReceiptImage("images/paella2.jpeg", paella));
 
-            ArrayList<Ingredient> ingredientsSalmorejo = new ArrayList<>();
-            Receipt salmorejo = receiptRepository.save(new Receipt("Salmorejo cordobés",
-                    "Crema fría de tomate, pan, ajo y aceite de oliva.", pedro, ingredientsSalmorejo, null));
-            ingredientsSalmorejo.add(new Ingredient("Pan", "250 g", salmorejo));
-            ingredientsSalmorejo.add(new Ingredient("Ajo", "2 u", salmorejo));
-            ingredientsSalmorejo.add(new Ingredient("Aceite de oliva", "100 g", salmorejo));
-            ingredientRepository.saveAll(ingredientsSalmorejo);
-            receiptImageRepository.save(new ReceiptImage("images/salmorejo1.jpeg", salmorejo));
-            receiptImageRepository.save(new ReceiptImage("images/salmorejo2.jpeg", salmorejo));
+                        ArrayList<Ingredient> ingredientsSalmorejo = new ArrayList<>();
+                        Receipt salmorejo = receiptRepository.save(new Receipt("Salmorejo cordobés",
+                                        "Crema fría de tomate, pan, ajo y aceite de oliva.", pedro,
+                                        ingredientsSalmorejo, null));
+                        ingredientsSalmorejo.add(new Ingredient("Pan", "250 g", salmorejo));
+                        ingredientsSalmorejo.add(new Ingredient("Ajo", "2 u", salmorejo));
+                        ingredientsSalmorejo.add(new Ingredient("Aceite de oliva", "100 g", salmorejo));
+                        ingredientsSalmorejo.add(new Ingredient("Tomate", "500 g", salmorejo));
+                        ingredientRepository.saveAll(ingredientsSalmorejo);
+                        receiptImageRepository.save(new ReceiptImage("images/salmorejo1.jpeg", salmorejo));
+                        receiptImageRepository.save(new ReceiptImage("images/salmorejo2.jpeg", salmorejo));
 
-            System.out.println("Init database");
-        };
-    }
+                        // Gazpacho andaluz
+                        ArrayList<Ingredient> ingredientsGazpacho = new ArrayList<>();
+                        Receipt gazpacho = receiptRepository.save(new Receipt("Gazpacho andaluz",
+                                        "Sopa fría de tomate, pepino, pimiento, cebolla y ajo.", ana,
+                                        ingredientsGazpacho, null));
+                        ingredientsGazpacho.add(new Ingredient("Tomate", "1 kg", gazpacho));
+                        ingredientsGazpacho.add(new Ingredient("Pepino", "1 u", gazpacho));
+                        ingredientsGazpacho.add(new Ingredient("Pimiento verde", "1 u", gazpacho));
+                        ingredientsGazpacho.add(new Ingredient("Cebolla", "1 u", gazpacho));
+                        ingredientsGazpacho.add(new Ingredient("Ajo", "1 diente", gazpacho));
+                        ingredientsGazpacho.add(new Ingredient("Aceite de oliva", "100 ml", gazpacho));
+                        ingredientRepository.saveAll(ingredientsGazpacho);
+                        receiptImageRepository.save(new ReceiptImage("images/gazpacho1.jpeg", gazpacho));
+                        receiptImageRepository.save(new ReceiptImage("images/gazpacho2.jpeg", gazpacho));
+
+                        // Cocido madrileño
+                        ArrayList<Ingredient> ingredientsCocido = new ArrayList<>();
+                        Receipt cocido = receiptRepository.save(new Receipt("Cocido madrileño",
+                                        "Guiso tradicional de garbanzos, carnes y verduras.", luis, ingredientsCocido,
+                                        null));
+                        ingredientsCocido.add(new Ingredient("Garbanzos", "300 g", cocido));
+                        ingredientsCocido.add(new Ingredient("Morcillo de ternera", "200 g", cocido));
+                        ingredientsCocido.add(new Ingredient("Gallina", "150 g", cocido));
+                        ingredientsCocido.add(new Ingredient("Chorizo", "100 g", cocido));
+                        ingredientsCocido.add(new Ingredient("Zanahoria", "2 u", cocido));
+                        ingredientRepository.saveAll(ingredientsCocido);
+                        receiptImageRepository.save(new ReceiptImage("images/cocido1.jpeg", cocido));
+                        receiptImageRepository.save(new ReceiptImage("images/cocido2.jpeg", cocido));
+
+                        System.out.println("Init database");
+                };
+        }
 }

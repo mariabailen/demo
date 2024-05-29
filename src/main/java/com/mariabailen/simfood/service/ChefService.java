@@ -1,5 +1,6 @@
 package com.mariabailen.simfood.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,4 +39,9 @@ public class ChefService {
         }
         return chefs;
     }
+
+     public Chef saveChef( String name, String lastName, LocalDate date, String imagePath) {
+        Chef chef = new Chef(name, lastName, date, imagePath);
+        return chefRepository.save(chef);
+     }
 }
