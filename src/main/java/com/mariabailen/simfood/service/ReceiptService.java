@@ -34,7 +34,8 @@ public class ReceiptService {
     public List<Receipt> getReceiptsByNameOrDesc(String input) {
         List<Receipt> receipts = new ArrayList<Receipt>();
         for (Receipt receipt : receiptRepository.findAll()) {
-            if (receipt.getName().toLowerCase().contains(input.toLowerCase()) || receipt.getDescription().toLowerCase().contains(input.toLowerCase())) {
+            if (receipt.getName().toLowerCase().contains(input.toLowerCase())
+                    || receipt.getDescription().toLowerCase().contains(input.toLowerCase())) {
                 receipts.add(receipt);
             }
         }
@@ -45,12 +46,20 @@ public class ReceiptService {
         return receiptRepository.findById(id);
     }
 
-    public Optional<Receipt> addIngredient(Long id, String name , String description) {
+    public Optional<Receipt> addIngredient(Long id, String name, String description) {
         Optional<Receipt> receipt = receiptRepository.findById(id);
         if (receipt.isPresent()) {
             ingredientRepository.save(new Ingredient(name, description, receipt.get()));
         }
         return receiptRepository.findById(id);
+    }
+
+    public Optional<Receipt> editIngredient(Long id, String name, String quantity) {
+        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
+        if(ingredient.isPresent()) {
+            ingredientRepository.save(new Ingredient(id, name, quantity, ingredient.get().getReceipt()));
+        }
+        return receiptRepository.findById(ingredient.get().getReceipt().getId());
     }
 
 }

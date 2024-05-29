@@ -62,4 +62,19 @@ public class ReceiptViewController {
         return "redirect:receipt";
     }
 
+    @PostMapping("/edit-ingredient")
+    public String editIngredient(@RequestParam Long id, @RequestParam String name,
+            @RequestParam String quantity, Model model, RedirectAttributes redirectAttributes) {
+        model.addAttribute("tab", "home");
+        model.addAttribute("appName", appName);
+
+        Optional<Receipt> receipt = receiptService.editIngredient(id, name, quantity);
+
+        if (receipt.isPresent()) {
+            model.addAttribute("receipt", receipt.get());
+        }
+        redirectAttributes.addAttribute("id", receipt.get().getId());
+        return "redirect:receipt";
+    }
+
 }

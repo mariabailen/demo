@@ -16,6 +16,13 @@ public class Ingredient {
         this.receipt = receipt;
     }
 
+    public Ingredient(Long id, String name, String quantity, Receipt receipt) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.receipt = receipt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
