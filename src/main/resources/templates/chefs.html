@@ -47,7 +47,7 @@
                                 <p th:text="'Last name: ' + ${chef.lastName}"></p>
                                 <p th:text="'Birthdate: ' + ${chef.birthDate}"></p>
                                 <p>
-                                    <a class="btn btn-primary" th:href="@{/chef(id=${chef.id})}">See Chef</a>
+                                    <a class="btn btn-primary" th:href="@{/chef(id=${chef.username})}">See Chef</a>
                                     <a class="btn btn-primary" sec:authorize="hasRole('ADMIN')">Edit Chef</a>
                                 </p>
 

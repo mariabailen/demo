@@ -192,7 +192,7 @@
                     <p th:text="'Name: ' + ${receipt.chef.name}"></p>
                     <p th:text="'Lastname: ' + ${receipt.chef.lastName}"></p>
                     <p th:text="'Birhtdate: ' + ${receipt.chef.birthDate}"></p>
-                    <a class="btn btn-primary" th:href="@{/chef(id=${receipt.chef.id})}">Ver Chef</a>
+                    <a class="btn btn-primary" th:href="@{/chef(id=${receipt.chef.username})}">Ver Chef</a>
                 </div>
             </div>
         </div>

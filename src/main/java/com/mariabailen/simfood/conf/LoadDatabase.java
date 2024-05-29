@@ -10,37 +10,35 @@ import com.mariabailen.simfood.model.Chef;
 import com.mariabailen.simfood.model.Ingredient;
 import com.mariabailen.simfood.model.Receipt;
 import com.mariabailen.simfood.model.ReceiptImage;
-import com.mariabailen.simfood.model.User;
 import com.mariabailen.simfood.repository.ChefRepository;
 import com.mariabailen.simfood.repository.IngredientRepository;
 import com.mariabailen.simfood.repository.ReceiptImageRepository;
 import com.mariabailen.simfood.repository.ReceiptRepository;
-import com.mariabailen.simfood.repository.UserRepository;
 
 @Configuration
 public class LoadDatabase {
 
         @Bean
-        CommandLineRunner initDatabase(UserRepository userRepository, ChefRepository chefRepository,
+        CommandLineRunner initDatabase(ChefRepository chefRepository,
                         ReceiptRepository receiptRepository, IngredientRepository ingredientRepository,
                         ReceiptImageRepository receiptImageRepository) {
                 return args -> {
-                        User user = userRepository.save(new User("admin", "123", "admin"));
-                        User user2 = userRepository.save(new User("cocinero", "123", "cocinero"));
 
                         Chef juan = chefRepository
-                                        .save(new Chef("Juan", "Perez", LocalDate.parse("1980-01-01"),
-                                                        "/images/juan.png"));
+                                        .save(new Chef("juan", "Juan", "Perez", LocalDate.parse("1980-01-01"),
+                                                        "/images/juan.png", "123", "CHEF"));
                         Chef maria = chefRepository
-                                        .save(new Chef("María", "Gomez", LocalDate.parse("1990-07-15"),
-                                                        "/images/maria.png"));
+                                        .save(new Chef("maria", "María", "Gomez", LocalDate.parse("1990-07-15"),
+                                                        "/images/maria.png", "123", "CHEF"));
                         Chef pedro = chefRepository
-                                        .save(new Chef("Pedro", "López", LocalDate.parse("1980-08-02"),
-                                                        "/images/pedro.png"));
+                                        .save(new Chef("pedro", "Pedro", "López", LocalDate.parse("1980-08-02"),
+                                                        "/images/pedro.png", "123", "ADMIN"));
                         Chef ana = chefRepository.save(
-                                        new Chef("Ana", "Martinez", LocalDate.parse("1985-05-20"), "/images/ana.png"));
+                                        new Chef("ana", "Ana", "Martinez", LocalDate.parse("1985-05-20"),
+                                                        "/images/ana.png", "123", "ADMIN"));
                         Chef luis = chefRepository.save(
-                                        new Chef("Luis", "Ramirez", LocalDate.parse("1975-03-10"), "/images/luis.png"));
+                                        new Chef("luis", "Luis", "Ramirez", LocalDate.parse("1975-03-10"),
+                                                        "/images/luis.png", "123", "ADMIN"));
 
                         ArrayList<Ingredient> ingredientsTortilla = new ArrayList<>();
                         Receipt tortilla = receiptRepository.save(new Receipt("Tortilla de patatas",

@@ -17,8 +17,8 @@ public class ChefService {
     @Autowired
     ChefRepository chefRepository;
 
-    public Optional<Chef> getChef(Long id) {
-        return chefRepository.findById(id);
+    public Optional<Chef> getChef(String username) {
+        return chefRepository.findById(username);
     }
 
     public List<Chef> getAllChefs() {
@@ -41,7 +41,7 @@ public class ChefService {
     }
 
      public Chef saveChef( String name, String lastName, LocalDate date, String imagePath) {
-        Chef chef = new Chef(name, lastName, date, imagePath);
+        Chef chef = new Chef(name, name, lastName, date, imagePath, "123", "chef");
         return chefRepository.save(chef);
      }
 }

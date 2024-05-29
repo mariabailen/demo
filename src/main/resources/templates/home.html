@@ -36,7 +36,7 @@
 					<div class="col-md-8 d-flex align-items-center">
 						<div class="card-body">
 							<h5 class="card-title" th:text="${receipt.name}"></h5>
-							<p><a th:href="@{/chef(id=${receipt.chef.id})}" class="card-text" th:text="| ${receipt.chef.name} ${receipt.chef.lastName} |"></a></p>
+							<p><a th:href="@{/chef(id=${receipt.chef.username})}" class="card-text" th:text="| ${receipt.chef.name} ${receipt.chef.lastName} |"></a></p>
 							<a class="btn btn-primary" th:href="@{/receipt(id=${receipt.id})}">Ver receta</a>
 						</div>
 					</div>

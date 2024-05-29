@@ -30,7 +30,7 @@ public class ChefViewController {
     String appName;
 
     @GetMapping("/chef")
-    public String chefDetail(@RequestParam(value = "id", required = true) Long id, Model model) {
+    public String chefDetail(@RequestParam(value = "id", required = true) String id, Model model) {
         model.addAttribute("tab", "chef");
         model.addAttribute("appName", appName);
         Optional<Chef> chef = chefService.getChef(id);
