@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mariabailen.simfood.model.Receipt;
 import com.mariabailen.simfood.service.ReceiptService;
 
+
 @Controller
 public class ReceiptViewController {
 
@@ -101,6 +102,13 @@ public class ReceiptViewController {
         }
         redirectAttributes.addAttribute("id", receipt.get().getId());
         return "redirect:receipt";
+    }
+
+    @PostMapping("/remove-receipt")
+    public String removeReceipt(@RequestParam Long id, Model model, RedirectAttributes redirectAttributes,
+    @AuthenticationPrincipal UserDetails currentUser) {
+        receiptService.removeReceipt(id);
+        return "redirect:home";
     }
 
 }

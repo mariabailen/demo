@@ -61,4 +61,8 @@ public class ReceiptService {
         return receiptRepository.findById(ingredient.get().getReceipt().getId());
     }
 
+    public void removeReceipt(Long id) {
+        receiptRepository.deleteById(id);
+    }
+
 }

@@ -35,10 +35,10 @@ public class LoadDatabase {
                                                         "/images/pedro.png", "123", "ADMIN"));
                         Chef ana = chefRepository.save(
                                         new Chef("ana", "Ana", "Martinez", LocalDate.parse("1985-05-20"),
-                                                        "/images/ana.png", "123", "ADMIN"));
+                                                        "/images/ana.jpeg", "123", "ADMIN"));
                         Chef luis = chefRepository.save(
                                         new Chef("luis", "Luis", "Ramirez", LocalDate.parse("1975-03-10"),
-                                                        "/images/luis.png", "123", "ADMIN"));
+                                                        "/images/luis.jpeg", "123", "ADMIN"));
 
                         ArrayList<Ingredient> ingredientsTortilla = new ArrayList<>();
                         Receipt tortilla = receiptRepository.save(new Receipt("Tortilla de patatas",

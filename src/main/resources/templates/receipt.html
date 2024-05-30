@@ -95,6 +95,17 @@
             </div>
         </div>
 
+
+        <div class="row mt-4" th:if="${isAdmin}">
+            <form th:action="@{/remove-receipt}" method="post">
+                <input type="hidden" class="form-control" id="id" name="id" th:value="${receipt.id}"
+                    required>
+                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" type="submit">
+                    Remove receipt
+                </button>
+            </form>
+        </div>
+
         <div class="row mt-4">
             <div class="col-12">
                 <h2>Ingredientes</h2>
