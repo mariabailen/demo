@@ -54,6 +54,8 @@ public class ReceiptViewController {
         if (currentUser != null) {
             model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        } else {
+            model.addAttribute("isAdmin", false);
         }
         Optional<Receipt> receipt = receiptService.getReceipt(id);
         if (receipt.isPresent()) {
@@ -88,8 +90,10 @@ public class ReceiptViewController {
         if (currentUser != null) {
             model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        } else {
+            model.addAttribute("isAdmin", false);
         }
-        
+
         Optional<Receipt> receipt = receiptService.editIngredient(id, name, quantity);
 
         if (receipt.isPresent()) {

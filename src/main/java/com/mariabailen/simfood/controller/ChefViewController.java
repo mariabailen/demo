@@ -40,6 +40,8 @@ public class ChefViewController {
         if (currentUser != null) {
             model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        } else {
+            model.addAttribute("isAdmin", false);
         }
 
         Optional<Chef> chef = chefService.getChef(id);
@@ -59,6 +61,8 @@ public class ChefViewController {
         if (currentUser != null) {
             model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        } else {
+            model.addAttribute("isAdmin", false);
         }
         if (searchInput == null || searchInput.isEmpty()) {
             model.addAttribute("chefs", chefService.getAllChefs());
@@ -79,6 +83,8 @@ public class ChefViewController {
         if (currentUser != null) {
             model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
                     .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        } else {
+            model.addAttribute("isAdmin", false);
         }
         String chefImagePath = null;
         if (!imageFile.isEmpty()) {
