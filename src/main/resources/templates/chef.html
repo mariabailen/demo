@@ -25,7 +25,7 @@
                     <p th:text="'Name: ' + ${chef.name}"></p>
                     <p th:text="'LastName: ' + ${chef.lastName}"></p>
                     <p th:text="'BirthDate: ' + ${chef.birthDate}"></p>
-                    <p><a href="" sec:authorize="hasRole('ADMIN')" >Edit Chef</a></p>
+                    <p><a href="" th:if="${isAdmin}" >Edit Chef</a></p>
                 </div>
             </div>
         </div>

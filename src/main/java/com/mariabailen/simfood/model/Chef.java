@@ -114,4 +114,12 @@ public class Chef {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public boolean isAdmin() {
+        return this.role.equalsIgnoreCase("admin");
+    }
+
+    public boolean isChef() {
+        return this.role.equalsIgnoreCase("chef");
+    }
 }

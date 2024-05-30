@@ -101,7 +101,7 @@
                 <ul class="list-group" th:each="ingredient: ${receipt.ingredients}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span th:text="|${ingredient.name} ${ingredient.quantity}|">Ingredient Name 100g</span>
-                        <button sec:authorize="hasAnyRole('ADMIN','CHEF')" type="button"
+                        <button th:if="${user?.username == receipt.chef.username or isAdmin}" type="button"
                             class="btn btn-secondary btn-sm" data-bs-toggle="modal"
                             th:data-bs-target="'#editIngredientModal' + ${ingredient.id}">
                             Edit
@@ -124,13 +124,13 @@
                                     <input type="hidden" name="id" th:value="${ingredient.id}">
                                     <div class="mb-3">
                                         <label for="quantity" class="form-label">Nombre del Ingrediente</label>
-                                        <input type="text" class="form-control" id="name"
-                                            name="name" th:value="${ingredient.name}" required>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            th:value="${ingredient.name}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="quantity" class="form-label">Cantidad</label>
-                                        <input type="text" class="form-control" id="quantity"
-                                            name="quantity" th:value="${ingredient.quantity}" required>
+                                        <input type="text" class="form-control" id="quantity" name="quantity"
+                                            th:value="${ingredient.quantity}" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -143,12 +143,13 @@
                     </div>
                 </div>
 
-                <button sec:authorize="hasAnyRole('ADMIN','CHEF')" type="button" class="btn btn-secondary btn-sm"
-                    data-bs-toggle="modal" data-bs-target="#addIngredient">Add Ingredient</button>
+                <button th:if="${user?.username == receipt.chef.username or isAdmin}" type="button"
+                    class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#addIngredient">Add
+                    Ingredient</button>
 
                 <!-- Modal para añadir ingredientes -->
                 <div id="addIngredient" class="modal fade" tabindex="-1" role="dialog"
-                    sec:authorize="hasAnyRole('ADMIN','CHEF')">
+                    th:if="${user?.username == receipt.chef.username or isAdmin}">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <form th:action="@{/add-ingredient}" method="post">

@@ -16,8 +16,7 @@ import com.mariabailen.simfood.model.Chef;
 import com.mariabailen.simfood.repository.ChefRepository;
 
 @Service
-public class CustomerUserDetailService implements UserDetailsService{
-
+public class CustomerUserDetailService implements UserDetailsService {
 
     @Autowired
     private ChefRepository chefRepository;
@@ -32,8 +31,6 @@ public class CustomerUserDetailService implements UserDetailsService{
     }
 
     private List<GrantedAuthority> getUserAuthority(final String userRole) {
-    return Collections.singletonList(new SimpleGrantedAuthority(userRole));
-}
-
-    
+        return Collections.singletonList(new SimpleGrantedAuthority(userRole));
+    }
 }

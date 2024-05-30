@@ -31,11 +31,10 @@ public class ReceiptService {
         return receipts;
     }
 
-    public List<Receipt> getReceiptsByNameOrDesc(String input) {
+    public List<Receipt> getReceiptsByName(String input) {
         List<Receipt> receipts = new ArrayList<Receipt>();
         for (Receipt receipt : receiptRepository.findAll()) {
-            if (receipt.getName().toLowerCase().contains(input.toLowerCase())
-                    || receipt.getDescription().toLowerCase().contains(input.toLowerCase())) {
+            if (receipt.getName().toLowerCase().contains(input.toLowerCase())) {
                 receipts.add(receipt);
             }
         }

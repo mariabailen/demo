@@ -15,7 +15,7 @@
 
 		<h1>Listado de recetas</h1>
 
-        <a href="" class="btn btn-outline-success" type="submit" sec:authorize="hasAnyRole('ADMIN','CHEF')">Add Receipt</a>
+        <a href="" class="btn btn-outline-success" type="submit" th:if="${isAdmin}">Add Receipt</a>
 
 		<div class="container-fluid">
 			<form class="d-flex" method="get" th:action="@{/home}">

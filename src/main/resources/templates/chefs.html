@@ -23,7 +23,7 @@
         </div>
 
         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-            data-bs-target="#addChef" sec:authorize="hasRole('ADMIN')">Add chef</button>
+            data-bs-target="#addChef" th:if="${isAdmin}">Add chef</button>
 
             <div class="container-fluid">
                 <form class="d-flex" method="get" th:action="@{/chefs}">
@@ -48,7 +48,7 @@
                                 <p th:text="'Birthdate: ' + ${chef.birthDate}"></p>
                                 <p>
                                     <a class="btn btn-primary" th:href="@{/chef(id=${chef.username})}">See Chef</a>
-                                    <a class="btn btn-primary" sec:authorize="hasRole('ADMIN')">Edit Chef</a>
+                                    <a class="btn btn-primary" th:if="${isAdmin}">Edit Chef</a>
                                 </p>
 
                             </div>
@@ -59,7 +59,7 @@
 
 
             <!-- Modal para añadir Chef -->
-            <div id="addChef" class="modal fade" tabindex="-1" role="dialog" sec:authorize="hasAnyRole('ADMIN')">
+            <div id="addChef" class="modal fade" tabindex="-1" role="dialog" th:if="${isAdmin}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form th:action="@{/chefs}" method="post" enctype="multipart/form-data">

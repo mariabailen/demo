@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +32,16 @@ public class ChefViewController {
     String appName;
 
     @GetMapping("/chef")
-    public String chefDetail(@RequestParam(value = "id", required = true) String id, Model model) {
+    public String chefDetail(@RequestParam(value = "id", required = true) String id, Model model,
+            @AuthenticationPrincipal UserDetails currentUser) {
         model.addAttribute("tab", "chef");
         model.addAttribute("appName", appName);
+        model.addAttribute("user", currentUser);
+        if (currentUser != null) {
+            model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        }
+
         Optional<Chef> chef = chefService.getChef(id);
         if (chef.isPresent()) {
             model.addAttribute("chef", chef.get());
@@ -41,11 +50,16 @@ public class ChefViewController {
     }
 
     @GetMapping("/chefs")
-    public String chefList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model) {
+    public String chefList(@RequestParam(value = "searchInput", required = false) String searchInput, Model model,
+            @AuthenticationPrincipal UserDetails currentUser) {
         model.addAttribute("tab", "chef");
         model.addAttribute("appName", appName);
-
+        model.addAttribute("user", currentUser);
         model.addAttribute("searchInput", searchInput);
+        if (currentUser != null) {
+            model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        }
         if (searchInput == null || searchInput.isEmpty()) {
             model.addAttribute("chefs", chefService.getAllChefs());
         } else {
@@ -56,11 +70,16 @@ public class ChefViewController {
 
     @PostMapping("/chefs")
     public String addChef(@RequestParam String name, @RequestParam String lastName, @RequestParam LocalDate birthDate,
-            @RequestParam("image") MultipartFile imageFile, Model model, RedirectAttributes redirectAttributes)
+            @RequestParam("image") MultipartFile imageFile, Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal UserDetails currentUser)
             throws IOException {
         model.addAttribute("tab", "chef");
         model.addAttribute("appName", appName);
-
+        model.addAttribute("user", currentUser);
+        if (currentUser != null) {
+            model.addAttribute("isAdmin", currentUser.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN")));
+        }
         String chefImagePath = null;
         if (!imageFile.isEmpty()) {
             // Save the image file to a local directory
